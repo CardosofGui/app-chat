@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="20dp"
+    tools:context=".MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/conteudo"
+        android:gravity="center"
+        >
+
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+            android:id="@+id/edtEmailLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Digite seu e-mail"
+            android:inputType="textEmailAddress"
+            app:bootstrapBrand="info"
+            app:bootstrapSize="lg"
+            app:roundedCorners="true" />
+
+        <com.beardedhen.androidbootstrap.BootstrapEditText
+            android:id="@+id/edtSenhaLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtEmailLogin"
+            android:layout_marginTop="10dp"
+            android:hint="Digite sua senha"
+            android:inputType="textPassword"
+            app:bootstrapBrand="info"
+            app:bootstrapSize="lg"
+            app:roundedCorners="true" />
+
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/btnEntrarLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/edtSenhaLogin"
+            android:layout_marginTop="20dp"
+            android:text="Entrar"
+            app:bootstrapBrand="success"
+            app:bootstrapSize="lg"
+            app:buttonMode="regular"
+            app:roundedCorners="true"
+            app:showOutline="true" />
+
+        <com.beardedhen.androidbootstrap.AwesomeTextView
+            android:id="@+id/txtIrCadastro"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/btnEntrarLogin"
+            android:layout_marginTop="50dp"
+            android:clickable="true"
+            android:text="Não possui cadastro? Clique aqui para se cadastrar"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            app:bootstrapBrand="success" />
+
+    </RelativeLayout>
+
+
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:id="@+id/txtRecuperarSenha"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:clickable="true"
+        android:text="Esqueceu sua senha? Clique aqui e solicite a redefinição"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:bootstrapBrand="info" />
+
+</RelativeLayout>

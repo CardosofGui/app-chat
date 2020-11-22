@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:padding="20dp"
+    tools:context=".Cadastrar">
+
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/edtUsuarioCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Digite um usuario"
+        android:inputType="textPersonName"
+        app:bootstrapBrand="info"
+        app:bootstrapSize="lg"
+        app:roundedCorners="true" />
+
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/edtEmailCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtUsuarioCadastro"
+        android:layout_marginTop="10dp"
+        android:hint="Digite seu e-mail"
+        android:inputType="textPersonName"
+        app:bootstrapBrand="info"
+        app:bootstrapSize="lg"
+        app:roundedCorners="true" />
+
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/edtSenhaCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtEmailCadastro"
+        android:layout_marginTop="10dp"
+        android:hint="Digite uma senha"
+        android:inputType="textPassword"
+        app:bootstrapBrand="info"
+        app:bootstrapSize="lg"
+        app:roundedCorners="true" />
+
+    <com.beardedhen.androidbootstrap.BootstrapEditText
+        android:id="@+id/edtRepetirSenhaCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtSenhaCadastro"
+        android:layout_marginTop="10dp"
+        android:hint="Repita sua senha"
+        android:inputType="textPassword"
+        app:bootstrapBrand="info"
+        app:bootstrapSize="lg"
+        app:roundedCorners="true" />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/btnEntrarCadastro"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/edtRepetirSenhaCadastro"
+        android:layout_marginTop="20dp"
+        android:text="Cadastrar"
+        app:bootstrapBrand="success"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="true" />
+
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:id="@+id/txtIrLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btnEntrarCadastro"
+        android:layout_marginTop="50dp"
+        android:clickable="true"
+        android:text="Já possui cadastro? Clique aqui e faça o login"
+        android:textAlignment="center"
+        android:textSize="18sp"
+        app:bootstrapBrand="success" />
+
+</RelativeLayout>

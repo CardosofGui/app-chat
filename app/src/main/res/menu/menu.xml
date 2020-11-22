@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/itemConfiguracao"
+        android:title="Configuração de perfil"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/itemSair"
+        android:title="Deslogar"
+        app:showAsAction="never"
+        />
+
+</menu>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".EscolhaChat"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="20dp">
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="65dp"
+        android:src="@drawable/img_chat"
+        />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtBemVindo"
+        android:textColor="#43AFA4"
+        android:textStyle="bold"
+        android:textAlignment="center"
+        android:layout_marginTop="10dp"
+        android:textSize="30sp"/>
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHAT PESSOAL"
+        app:roundedCorners="true"
+        app:buttonMode="regular"
+        app:bootstrapSize="xl"
+        app:bootstrapBrand="info"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:id="@+id/btnChatPessoal"
+        />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHAT EM GRUPO - GLOBAL"
+        app:roundedCorners="true"
+        app:buttonMode="regular"
+        app:bootstrapSize="xl"
+        app:bootstrapBrand="danger"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textStyle="bold"
+        android:id="@+id/btnChatGrupoGlobal"
+        />
+
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="CHAT EM GRUPO - PRIVADO"
+        app:roundedCorners="true"
+        app:buttonMode="regular"
+        app:bootstrapSize="xl"
+        app:bootstrapBrand="warning"
+        android:textStyle="bold"
+        android:id="@+id/btnChatGrupoPrivado"
+        />
+
+
+</LinearLayout>
