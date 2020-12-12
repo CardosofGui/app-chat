@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ChatGrupoPublico"></activity>
+        <activity android:name=".Settings"></activity>
+        <activity android:name=".ChatGrupoPublico" />
         <activity android:name=".MenuChatGlobal" />
         <activity android:name=".EscolhaChat" />
         <activity android:name=".ChatFriend" />

@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        getSupportActionBar().hide();
+
+        verificacaoAutenticacao();
 
 
         // Identificando Ids
@@ -55,9 +58,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         btnLogar.setOnClickListener(this);
         txtIrCadastro.setOnClickListener(this);
         txtRecuperarSenha.setOnClickListener(this);
-
-        verificacaoAutenticacao();
-
     }
 
     @Override
@@ -112,7 +112,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 FirebaseUser mUser = firebaseAuth.getCurrentUser();
 
                 if(mUser == null){
-                    Toast.makeText(MainActivity.this, "Usuario não logado", Toast.LENGTH_SHORT).show();
                 }else{
 
                     DatabaseReference reference = mDatabase.getReference().child("BD").child("Usuario").child(mAuth.getCurrentUser().getUid());
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                             it.putExtra("usuarioLogado", user);
 
                             startActivityForResult(it, 1);
-                            Toast.makeText(getBaseContext(), "Usuario já logado "+user, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getBaseContext(), "Bem vindo de volta "+user, Toast.LENGTH_SHORT).show();
                             finish();
                         }
 

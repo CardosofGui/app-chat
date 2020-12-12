@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MenuChatGlobal">
+    tools:context=".MenuChatGlobal"
+    android:paddingLeft="20dp"
+    android:paddingRight="20dp">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,12 +14,22 @@
         android:id="@+id/opcaoUsuario"
         android:orientation="horizontal"
         android:layout_alignParentTop="true"
+        android:gravity="center"
+        android:paddingTop="25dp"
+        android:paddingBottom="15dp"
         >
 
-        <TextView
-            android:layout_width="wrap_content"
+        <com.beardedhen.androidbootstrap.BootstrapButton
+            android:id="@+id/btnCriarChatGlobal"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Testando"/>
+            android:text="CRIAR CHAT"
+            android:textStyle="bold"
+            app:bootstrapBrand="danger"
+            app:buttonMode="regular"
+            app:roundedCorners="true"
+            app:bootstrapSize="xl"
+            />
 
     </LinearLayout>
 

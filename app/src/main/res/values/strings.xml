@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AppChat</string>
+    <string name="email_editar">Digite seu novo E-mail</string>
+    <string name="senha_editar">Digite sua nova Senha</string>
 </resources>

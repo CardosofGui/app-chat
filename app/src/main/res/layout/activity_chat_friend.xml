@@ -9,6 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         android:layout_above="@+id/layout_enviarmensagem"
         android:id="@+id/scrollMensagens">
 
@@ -16,8 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:id="@+id/linear_mensagens"
-            android:gravity="top">
+            android:id="@+id/linear_mensagens">
 
         </LinearLayout>
 
@@ -30,22 +30,28 @@
         android:orientation="horizontal"
         android:layout_alignParentBottom="true"
         android:id="@+id/layout_enviarmensagem"
+        android:padding="10dp"
         >
 
-        <EditText
+        <com.beardedhen.androidbootstrap.BootstrapEditText
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_weight="1"
             android:hint="Digite sua mensagem"
             android:id="@+id/edtMensagem"
+            app:roundedCorners="true"
+            android:padding="25dp"
+            android:layout_marginRight="15dp"
+            app:bootstrapSize="lg"
             />
 
         <Button
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.4"
-            android:text="Enviar"
-            android:id="@+id/btnEnviarMensagem"/>
+            android:layout_height="40dp"
+            android:layout_weight="0.2"
+            android:background="@drawable/icon_send_message"
+            android:id="@+id/btnEnviarMensagem"
+            />
 
     </LinearLayout>
 

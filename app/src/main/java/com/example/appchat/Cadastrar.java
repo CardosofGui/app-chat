@@ -38,6 +38,8 @@ public class Cadastrar extends AppCompatActivity implements View.OnClickListener
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastrar2);
+        getSupportActionBar().hide();
+
 
         // Identificando IDs
         edtUsuarioCadastro = findViewById(R.id.edtUsuarioCadastro);

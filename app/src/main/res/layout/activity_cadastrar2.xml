@@ -4,14 +4,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_login"
     android:gravity="center"
     android:padding="20dp"
     tools:context=".Cadastrar">
+
+    <ImageView
+        android:id="@+id/imgRegistroIcon"
+        android:layout_width="match_parent"
+        android:layout_height="75dp"
+        android:layout_marginBottom="30dp"
+        android:src="@drawable/registro_icon"
+        />
 
     <com.beardedhen.androidbootstrap.BootstrapEditText
         android:id="@+id/edtUsuarioCadastro"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/imgRegistroIcon"
         android:hint="Digite um usuario"
         android:inputType="textPersonName"
         app:bootstrapBrand="info"

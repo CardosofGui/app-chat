@@ -6,7 +6,10 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:padding="20dp"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/bg_login">
+
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,6 +17,14 @@
         android:id="@+id/conteudo"
         android:gravity="center"
         >
+
+        <ImageView
+            android:id="@+id/imgLoginIcon"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_marginBottom="30dp"
+            android:src="@drawable/login_icon"
+            />
 
         <com.beardedhen.androidbootstrap.BootstrapEditText
             android:id="@+id/edtEmailLogin"
@@ -23,7 +34,8 @@
             android:inputType="textEmailAddress"
             app:bootstrapBrand="info"
             app:bootstrapSize="lg"
-            app:roundedCorners="true" />
+            app:roundedCorners="true"
+            android:layout_below="@+id/imgLoginIcon"/>
 
         <com.beardedhen.androidbootstrap.BootstrapEditText
             android:id="@+id/edtSenhaLogin"

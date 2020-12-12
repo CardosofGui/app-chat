@@ -2,8 +2,8 @@ package com.example.appchat;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -16,23 +16,22 @@ import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
-import java.lang.ref.Reference;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class ChatFriend extends AppCompatActivity implements View.OnClickListener {
 
     private ScrollView scrollMensagens;
-    private EditText edtMensagem;
+    private BootstrapEditText edtMensagem;
     private Button btnEnviarMensagem;
 
     private FirebaseDatabase mDatabase;
@@ -42,6 +41,9 @@ public class ChatFriend extends AppCompatActivity implements View.OnClickListene
     private String usuarioSolicitado;
     private String chatSelecionado;
 
+
+    private AlertDialog dialog;
+    private  AlertDialog.Builder dialogBuilder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,7 +56,7 @@ public class ChatFriend extends AppCompatActivity implements View.OnClickListene
         scrollMensagens = findViewById(R.id.scrollMensagens);
 
 
-        // Firebase
+        // Firebase é atraves desse código
         mDatabase = FirebaseDatabase.getInstance();
 
         // Intent
@@ -105,13 +107,13 @@ public class ChatFriend extends AppCompatActivity implements View.OnClickListene
     }
 
 
-    private void gerarTxtViews(String mensagem, String usuario, String horario){
+    private void gerarTxtViews(String mensagem, String usuario, String horario, final String key){
 
 
 
-        LinearLayout LayouMensagens = findViewById(R.id.linear_mensagens);
+        final LinearLayout LayouMensagens = findViewById(R.id.linear_mensagens);
 
-        LinearLayout LayoutMensagem = new LinearLayout(this);
+        final LinearLayout LayoutMensagem = new LinearLayout(this);
         LinearLayout.LayoutParams LayouMensagemParams = new LinearLayout.LayoutParams(500, ViewGroup.LayoutParams.WRAP_CONTENT);
         LayoutMensagem.setOrientation(LinearLayout.VERTICAL);
         LayouMensagemParams.setMargins(10, 10, 10, 10);
@@ -123,7 +125,7 @@ public class ChatFriend extends AppCompatActivity implements View.OnClickListene
         txtUser.setLayoutParams(txtUserParams);
         txtUser.setTypeface(Typeface.DEFAULT_BOLD);
 
-        TextView txtMensagem = new TextView(this);
+        final TextView txtMensagem = new TextView(this);
         LinearLayout.LayoutParams txtMensagemParams = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         txtMensagem.setLayoutParams(txtMensagemParams);
         txtMensagem.setText(mensagem);
@@ -135,10 +137,22 @@ public class ChatFriend extends AppCompatActivity implements View.OnClickListene
         txtHorario.setText(horario);
         txtHorario.setTextSize((float) 12);
 
+        LayoutMensagem.setTag(key);
+
         if(usuario.equals(usuarioLogado)){
             LayouMensagemParams.gravity = Gravity.RIGHT;
             LayoutMensagem.setBackground(getDrawable(R.drawable.mensagem_enviada));
             txtUser.setText("Você");
+
+            LayoutMensagem.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+
+                    criarPopupEditarMensagem(key, LayoutMensagem, txtMensagem);
+                    return false;
+                }
+            });
+
         }else{
             LayouMensagemParams.gravity = Gravity.LEFT;
             LayoutMensagem.setBackground(getDrawable(R.drawable.mensagem_recebida));
@@ -146,12 +160,21 @@ public class ChatFriend extends AppCompatActivity implements View.OnClickListene
         }
 
 
+
         LayoutMensagem.addView(txtUser);
         LayoutMensagem.addView(txtMensagem);
         LayoutMensagem.addView(txtHorario);
         LayouMensagens.addView(LayoutMensagem);
-        scrollMensagens.scrollTo(0, 999999999);
+
     }
+
+    private void apagarMensagem(String key) {
+
+        final DatabaseReference mReference = mDatabase.getReference().child("BD").child("chat").child(chatSelecionado).child(key);
+
+        mReference.child("mensagem").removeValue();
+    }
+
 
     private void atualizarMensagensNovas(){
 
@@ -165,26 +188,31 @@ public class ChatFriend extends AppCompatActivity implements View.OnClickListene
                     String mensagem = snapshot.child("mensagem").getValue(String.class);
                     String user = snapshot.child("user").getValue(String.class);
                     String horario = snapshot.child("horario").getValue(String.class);
+                    String key = snapshot.getKey();
 
-                    gerarTxtViews(mensagem, user, horario);
+                    gerarTxtViews(mensagem, user, horario, key);
                     scrollMensagens.scrollTo(0, 999999999);
                 }
             }
 
             @Override
             public void onChildChanged(@NonNull DataSnapshot snapshot, @Nullable String previousChildName) {
+
                 if(snapshot.child("mensagem").exists() && snapshot.child("user").exists() && snapshot.child("horario").exists()){
                     String mensagem = snapshot.child("mensagem").getValue(String.class);
                     String user = snapshot.child("user").getValue(String.class);
                     String horario = snapshot.child("horario").getValue(String.class);
+                    String key = snapshot.getKey();
 
-                    gerarTxtViews(mensagem, user, horario);
+                    gerarTxtViews(mensagem, user, horario, key);
                     scrollMensagens.scrollTo(0, 999999999);
                 }
+
             }
 
             @Override
             public void onChildRemoved(@NonNull DataSnapshot snapshot) {
+
 
             }
 
@@ -200,5 +228,38 @@ public class ChatFriend extends AppCompatActivity implements View.OnClickListene
         };
 
         reference.addChildEventListener(atualizarMensagens);
+    }
+
+    @Override
+    protected void onResume() {
+        LinearLayout LayouMensagens = findViewById(R.id.linear_mensagens);
+        LayouMensagens.removeAllViews();
+
+        super.onResume();
+    }
+
+    private void criarPopupEditarMensagem(final String key, final LinearLayout LayoutMensagem, TextView txtMensagem) {
+        dialogBuilder = new AlertDialog.Builder(this);
+        final View editarMensagem = getLayoutInflater().inflate(R.layout.popup_editar_excluir_mensagem, null);
+
+        final BootstrapEditText edtMensagem = editarMensagem.findViewById(R.id.edtEdicaoMensagem);
+        final BootstrapButton btnExcluir = editarMensagem.findViewById(R.id.btnConfirmarExclusao);
+
+        edtMensagem.setText(txtMensagem.getText().toString());
+
+        btnExcluir.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LayoutMensagem.setLayoutParams(new LinearLayout.LayoutParams(0, 0));
+                apagarMensagem(key);
+                dialog.cancel();
+            }
+        });
+
+
+        dialogBuilder.setView(editarMensagem);
+        dialog = dialogBuilder.create();
+        dialog.show();
     }
 }

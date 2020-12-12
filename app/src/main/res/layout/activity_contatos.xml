@@ -8,11 +8,7 @@
     android:orientation="vertical"
     android:layout_margin="15dp">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Contatos"
-        android:id="@+id/txtContatos"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -23,7 +19,7 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:hint="adicionar amigo"
+            android:hint="Nome do Usuario"
             android:id="@+id/edtAdicionarAmigo"
             />
 

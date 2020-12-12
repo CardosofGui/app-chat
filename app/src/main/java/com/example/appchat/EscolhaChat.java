@@ -59,12 +59,15 @@ public class EscolhaChat extends AppCompatActivity implements View.OnClickListen
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.itemConfiguracao:
+                Intent it = new Intent(this,  Settings.class);
+                it.putExtra("usuarioLogado", usuarioLogado);
+                startActivity(it);
                 break;
             case R.id.itemSair:
+                finish();
                 mAuth = FirebaseAuth.getInstance();
                 mAuth.signOut();
                 startActivity(new Intent(this, MainActivity.class));
-                finish();
                 break;
         }
 

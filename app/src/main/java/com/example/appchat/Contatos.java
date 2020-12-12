@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -45,17 +46,17 @@ public class Contatos extends AppCompatActivity implements View.OnClickListener 
     private String chatSelecionado;
 
     private  ChildEventListener atualizarContato;
-    private Map<String, String> contatos;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_contatos);
 
+        setTitle("CONTATOS");
+
         edtAdicionarAmigo = findViewById(R.id.edtAdicionarAmigo);
         btnAdicionarAmigo = findViewById(R.id.btnAdicionarAmigo);
 
-        contatos = new HashMap<>();
 
         mDatabase = FirebaseDatabase.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -123,10 +124,14 @@ public class Contatos extends AppCompatActivity implements View.OnClickListener 
                 }
 
                 if(verificacaoUsuarioAdicionado == true && verificacaoUsuarioExistente == true){
-                    String key = reference.child("chat").push().getKey();
+                    if(amigo.equals(usuarioLogado)){
+                        Toast.makeText(Contatos.this, "Você não pode adicionar você mesmo", Toast.LENGTH_SHORT).show();
+                    }else{
+                        String key = reference.child("chat").push().getKey();
 
-                    reference.child("chat").child(key).child("user1").setValue(usuarioLogado);
-                    reference.child("chat").child(key).child("user2").setValue(amigo);
+                        reference.child("chat").child(key).child("user1").setValue(usuarioLogado);
+                        reference.child("chat").child(key).child("user2").setValue(amigo);
+                    }
                 }
             }
 
@@ -147,10 +152,12 @@ public class Contatos extends AppCompatActivity implements View.OnClickListener 
         txtContatoParams.setMargins(0,20,0,20);
 
         txtContato.setLayoutParams(txtContatoParams);
-        txtContato.setPadding(15,15,15,15);
-        txtContato.setBackgroundColor(Color.parseColor("#DFDFDF"));
+        txtContato.setPadding(25,25,25,25);
+        txtContato.setBackgroundColor(Color.parseColor("#717171"));
         txtContato.setText(usuarioADD);
         txtContato.setClickable(true);
+        txtContato.setTypeface(Typeface.DEFAULT_BOLD);
+        txtContato.setTextColor(Color.parseColor("#000000"));
 
 
 
